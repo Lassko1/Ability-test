@@ -1,0 +1,67 @@
+"imp_leader_reactive_armor"
+{
+    "BaseClass"             "ability_datadriven"
+    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+    "AbilityTextureName"    ""
+    "MaxLevel"              "1"
+            
+    "AbilitySpecial"
+    {
+        // On Max Stacks: 42 54 72 90 120 150 AS and MS
+        
+        "01"
+        {
+            "var_type"              "FIELD_FLOAT"
+            "armor_per_hit"         "0.05"
+        }
+
+        "02"
+        {
+            "var_type"              "FIELD_FLOAT"
+            "hp_regen_per_hit"      "0.25"
+        }
+
+        "03"
+        {
+            "var_type"              "FIELD_INTEGER"
+            "max_stacks"            "20"
+        }
+
+        "04"
+        {
+            "var_type"              "FIELD_INTEGER"
+            "duration"              "5"
+        }            
+    }
+
+    "Modifiers"
+    {
+        "modifier_imp_leader_reactive_armor"
+        {
+            "Passive"   "1"
+            "IsHidden"  "1"
+            "IsPurgable" "1"
+            
+            "OnAttacked"
+            {
+                "RunScript"
+                {
+                    "ScriptFile"    "abilities/demonbuilder/imp_leader_reactive_armor.lua"
+                    "Function"      "ReactiveArmor"
+                }
+            }
+        }
+
+        "modifier_imp_leader_reactive_armor"
+        {
+           // "EffectName"    "particles/items2_fx/mask_of_madness.vpcf"
+           // "EffectAttachType"  "follow_origin"
+           // "TextureName"   "peon_frenzy"
+            "Properties"
+            {
+                "MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT" "%hp_regen_per_hit"
+                "MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%armor_per_hit" 
+            }
+        }
+    }
+}
